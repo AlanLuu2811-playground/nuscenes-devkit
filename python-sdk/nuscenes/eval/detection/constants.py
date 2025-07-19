@@ -1,8 +1,10 @@
 # nuScenes dev-kit.
 # Code written by Oscar Beijbom and Varun Bankiti, 2019.
 
-DETECTION_NAMES = ['car', 'truck', 'bus', 'trailer', 'construction_vehicle', 'pedestrian', 'motorcycle', 'bicycle',
-                   'traffic_cone', 'barrier']
+#DETECTION_NAMES = ['car', 'truck', 'bus', 'trailer', 'construction_vehicle', 'pedestrian', 'motorcycle', 'bicycle',
+#                   'traffic_cone', 'barrier']
+DETECTION_NAMES = ['guilder']
+                   
 
 PRETTY_DETECTION_NAMES = {'car': 'Car',
                           'truck': 'Truck',
@@ -26,8 +28,9 @@ DETECTION_COLORS = {'car': 'C0',
                     'traffic_cone': 'C8',
                     'barrier': 'C9'}
 
-ATTRIBUTE_NAMES = ['pedestrian.moving', 'pedestrian.sitting_lying_down', 'pedestrian.standing', 'cycle.with_rider',
-                   'cycle.without_rider', 'vehicle.moving', 'vehicle.parked', 'vehicle.stopped']
+#ATTRIBUTE_NAMES = ['pedestrian.moving', 'pedestrian.sitting_lying_down', 'pedestrian.standing', 'cycle.with_rider',
+#                   'cycle.without_rider', 'vehicle.moving', 'vehicle.parked', 'vehicle.stopped']
+ATTRIBUTE_NAMES = ['guilder']
 
 PRETTY_ATTRIBUTE_NAMES = {'pedestrian.moving': 'Ped. Moving',
                           'pedestrian.sitting_lying_down': 'Ped. Sitting',

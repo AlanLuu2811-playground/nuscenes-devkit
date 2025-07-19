@@ -4,9 +4,11 @@
 from typing import Callable
 
 import numpy as np
+import math
+from pyquaternion import Quaternion
 
 from nuscenes.eval.common.data_classes import EvalBoxes
-from nuscenes.eval.common.utils import center_distance, scale_iou, yaw_diff, velocity_l2, attr_acc, cummean
+from nuscenes.eval.common.utils import center_distance, scale_iou, yaw_diff, velocity_l2, attr_acc, cummean, pitch_diff
 from nuscenes.eval.detection.data_classes import DetectionMetricData
 
 
@@ -98,13 +100,27 @@ def accumulate(gt_boxes: EvalBoxes,
             # Since it is a match, update match data also.
             gt_box_match = gt_boxes[pred_box.sample_token][match_gt_idx]
 
+            print('********')
+
+            print('gt_box_center: ', gt_box_match.translation)
+            print('pred_box_center: ', pred_box.translation)
+
+            print('gt_box_dim: ', gt_box_match.size)
+            print('pred_box_dim: ', pred_box.size)
+
+            print('gt_rot: ', math.degrees(Quaternion(gt_box_match.rotation).yaw_pitch_roll[1]))
+            print('pred_rot: ', math.degrees(Quaternion(pred_box.rotation).yaw_pitch_roll[1]))
+
+            #print('gt_box_rot: ', Quaternion(gt_box_match.rotation).yaw_pitch_roll)
+            #print('pred_box_rot: ', Quaternion(pred_box.rotation).yaw_pitch_roll)
+
             match_data['trans_err'].append(center_distance(gt_box_match, pred_box))
             match_data['vel_err'].append(velocity_l2(gt_box_match, pred_box))
             match_data['scale_err'].append(1 - scale_iou(gt_box_match, pred_box))
 
             # Barrier orientation is only determined up to 180 degree. (For cones orientation is discarded later)
             period = np.pi if class_name == 'barrier' else 2 * np.pi
-            match_data['orient_err'].append(yaw_diff(gt_box_match, pred_box, period=period))
+            match_data['orient_err'].append(pitch_diff(gt_box_match, pred_box, period=period))
 
             match_data['attr_err'].append(1 - attr_acc(gt_box_match, pred_box))
             match_data['conf'].append(pred_box.detection_score)

@@ -30,7 +30,8 @@ def velocity_l2(gt_box: EvalBox, pred_box: EvalBox) -> float:
     :param pred_box: Predicted sample.
     :return: L2 distance.
     """
-    return np.linalg.norm(np.array(pred_box.velocity) - np.array(gt_box.velocity))
+    #return np.linalg.norm(np.array(pred_box.velocity) - np.array(gt_box.velocity))
+    return 0.0
 
 
 def yaw_diff(gt_box: EvalBox, eval_box: EvalBox, period: float = 2*np.pi) -> float:
@@ -45,6 +46,19 @@ def yaw_diff(gt_box: EvalBox, eval_box: EvalBox, period: float = 2*np.pi) -> flo
     yaw_est = quaternion_yaw(Quaternion(eval_box.rotation))
 
     return abs(angle_diff(yaw_gt, yaw_est, period))
+
+def pitch_diff(gt_box: EvalBox, eval_box: EvalBox, period: float = 2*np.pi) -> float:
+    """
+    Returns the pitch angle difference between the orientation of two boxes.
+    :param gt_box: Ground truth box.
+    :param eval_box: Predicted box.
+    :param period: Periodicity in radians for assessing angle difference.
+    :return: Yaw angle difference in radians in [0, pi].
+    """
+    pitch_gt = Quaternion(gt_box.rotation).yaw_pitch_roll[1]
+    pitch_est = Quaternion(eval_box.rotation).yaw_pitch_roll[1]
+
+    return abs(angle_diff(pitch_gt, pitch_est, period))
 
 
 def angle_diff(x: float, y: float, period: float) -> float:

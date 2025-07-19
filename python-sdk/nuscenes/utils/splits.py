@@ -149,6 +149,8 @@ mini_train = \
 mini_val = \
     ['scene-0103', 'scene-0916']
 
+adam_train = ['scene_jb']
+
 
 def create_splits_logs(split: str, nusc: 'NuScenes') -> List[str]:
     """
@@ -204,7 +206,8 @@ def create_splits_scenes(verbose: bool = False) -> Dict[str, List[str]]:
     assert len(all_scenes) == 1000 and len(set(all_scenes)) == 1000, 'Error: Splits incomplete!'
     scene_splits = {'train': train, 'val': val, 'test': test,
                     'mini_train': mini_train, 'mini_val': mini_val,
-                    'train_detect': train_detect, 'train_track': train_track}
+                    'train_detect': train_detect, 'train_track': train_track,
+                    'adam_train': adam_train}
 
     # Optional: Print scene-level stats.
     if verbose:

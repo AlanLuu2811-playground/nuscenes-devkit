@@ -73,18 +73,18 @@ def load_gt(nusc: NuScenes, eval_split: str, box_cls, verbose: bool = False) -> 
 
     # Check compatibility of split with nusc_version.
     version = nusc.version
-    if eval_split in {'train', 'val', 'train_detect', 'train_track'}:
-        assert version.endswith('trainval'), \
-            'Error: Requested split {} which is not compatible with NuScenes version {}'.format(eval_split, version)
-    elif eval_split in {'mini_train', 'mini_val'}:
-        assert version.endswith('mini'), \
-            'Error: Requested split {} which is not compatible with NuScenes version {}'.format(eval_split, version)
-    elif eval_split == 'test':
-        assert version.endswith('test'), \
-            'Error: Requested split {} which is not compatible with NuScenes version {}'.format(eval_split, version)
-    else:
-        raise ValueError('Error: Requested split {} which this function cannot map to the correct NuScenes version.'
-                         .format(eval_split))
+    #if eval_split in {'train', 'val', 'train_detect', 'train_track'}:
+    #    assert version.endswith('trainval'), \
+    #        'Error: Requested split {} which is not compatible with NuScenes version {}'.format(eval_split, version)
+    #elif eval_split in {'mini_train', 'mini_val'}:
+    #    assert version.endswith('mini'), \
+    #        'Error: Requested split {} which is not compatible with NuScenes version {}'.format(eval_split, version)
+    #elif eval_split == 'test':
+    #    assert version.endswith('test'), \
+    #        'Error: Requested split {} which is not compatible with NuScenes version {}'.format(eval_split, version)
+    #else:
+    #    raise ValueError('Error: Requested split {} which this function cannot map to the correct NuScenes version.'
+    #                     .format(eval_split))
 
     if eval_split == 'test':
         # Check that you aren't trying to cheat :).

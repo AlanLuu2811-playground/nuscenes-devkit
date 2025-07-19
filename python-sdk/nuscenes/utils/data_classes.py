@@ -610,9 +610,12 @@ class Box:
         w, l, h = self.wlh * wlh_factor
 
         # 3D bounding box corners. (Convention: x points forward, y to the left, z up.)
-        x_corners = l / 2 * np.array([1,  1,  1,  1, -1, -1, -1, -1])
-        y_corners = w / 2 * np.array([1, -1, -1,  1,  1, -1, -1,  1])
-        z_corners = h / 2 * np.array([1,  1, -1, -1,  1,  1, -1, -1])
+        #x_corners = l / 2 * np.array([1,  1,  1,  1, -1, -1, -1, -1])
+        #y_corners = w / 2 * np.array([1, -1, -1,  1,  1, -1, -1,  1])
+        #z_corners = h / 2 * np.array([1,  1, -1, -1,  1,  1, -1, -1])
+        x_corners = w / 2 * np.array([-1, 1, 1, -1, -1, 1, 1, -1])
+        y_corners = h / 2 * np.array([-1, -1, 1, 1, -1, -1, 1, 1])
+        z_corners = l / 2 * np.array([1,  1,  1,  1, -1, -1, -1, -1])
         corners = np.vstack((x_corners, y_corners, z_corners))
 
         # Rotate
